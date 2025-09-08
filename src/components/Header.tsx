@@ -51,7 +51,7 @@ const Header = () => {
             className="flex items-center"
           >
             <img
-              src={import.meta.env.BASE_URL + "assets/logo1.png"}
+              src={import.meta.env.BASE_URL + "src/assets/logo1.png"}
               alt="Logo"
               className="w-28 md:w-36 h-14 md:h-20 mr-2"
             />
