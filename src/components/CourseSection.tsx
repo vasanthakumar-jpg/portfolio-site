@@ -2,8 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Play, Clock, Users, Star, Award, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import pythonCertificate from "../assets/python-certificate.jpg";
-import frontendCertficate from "../assets/Frontend-certificate.jpg";
 
 const CourseSection = () => {
   const ref = useRef(null);
@@ -19,7 +17,7 @@ const CourseSection = () => {
         "Comprehensive course covering HTML5, CSS3, JavaScript, React.js, and modern frontend development practices.",
       thumbnail:
         "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400",
-      certificate: frontendCertficate, // Use a real certificate image here
+      certificate: import.meta.env.BASE_URL + "assets/Frontend-certificate.jpg",
       duration: "Certificate",
       students: "Completed",
       rating: 5.0,
@@ -39,7 +37,7 @@ const CourseSection = () => {
         "Intensive premium bootcamp covering Python fundamentals, data structures, web development, and advanced programming concepts.",
       thumbnail:
         "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400",
-      certificate: pythonCertificate,
+      certificate: import.meta.env.BASE_URL + "assets/python-certificate.jpg",
       duration: "Certificate",
       students: "Completed",
       rating: 5.0,
@@ -222,9 +220,8 @@ const CourseSection = () => {
                 src={
                   openIndex === 0
                     ? import.meta.env.BASE_URL +
-                      "src/assets/Frontend-certificate.jpg"
-                    : import.meta.env.BASE_URL +
-                      "src/assets/python-certificate.jpg"
+                      "assets/Frontend-certificate.jpg"
+                    : import.meta.env.BASE_URL + "assets/python-certificate.jpg"
                 }
                 alt={
                   openIndex === 0

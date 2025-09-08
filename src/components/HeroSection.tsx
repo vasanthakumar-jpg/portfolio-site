@@ -149,7 +149,7 @@ const HeroSection = () => {
           >
             <div className="relative z-20">
               <img
-                src={import.meta.env.BASE_URL + "src/assets/profile-hero.jpg"}
+                src={import.meta.env.BASE_URL + "assets/profile-hero.jpg"}
                 alt="Vasantha Kumar - Front-End Developer"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
               />
