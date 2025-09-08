@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-site",
+  "name": "portfolio-mui",
   "homepage": "https://vasanthakumar-jpg.github.io/portfolio-site",
   "private": true,
   "version": "0.0.0",
@@ -10,7 +10,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+   "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
 
   },

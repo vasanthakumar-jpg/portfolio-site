@@ -3,18 +3,18 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: '/portfolio-site/',
+export default defineConfig(({ command  }) => ({
   server: {
     host: "::",
     port: 8080,
   },
+  base: command === 'build' ? '/portfolio-site/' : '/', 
   plugins: [
     react(),
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"), 
     },
   },
 }));
