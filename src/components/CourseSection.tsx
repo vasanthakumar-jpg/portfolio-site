@@ -1,9 +1,9 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Play, Clock, Users, Star, Award, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import pythonCertificate from '../assets/python-certificate.jpg';
-import frontendCertficate from '../assets/Frontend-certificate.jpg';
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Play, Clock, Users, Star, Award, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import pythonCertificate from "../assets/python-certificate.jpg";
+import frontendCertficate from "../assets/Frontend-certificate.jpg";
 
 const CourseSection = () => {
   const ref = useRef(null);
@@ -14,48 +14,52 @@ const CourseSection = () => {
 
   const courses = [
     {
-      title: 'Frontend Development',
-      description: 'Comprehensive course covering HTML5, CSS3, JavaScript, React.js, and modern frontend development practices.',
-      thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400',
+      title: "Frontend Development",
+      description:
+        "Comprehensive course covering HTML5, CSS3, JavaScript, React.js, and modern frontend development practices.",
+      thumbnail:
+        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400",
       certificate: frontendCertficate, // Use a real certificate image here
-      duration: 'Certificate',
-      students: 'Completed',
+      duration: "Certificate",
+      students: "Completed",
       rating: 5.0,
-      level: 'Advanced',
-      price: 'Certified',
+      level: "Advanced",
+      price: "Certified",
       features: [
-        'HTML5 & CSS3',
-        'JavaScript ES6+',
-        'React.js Development',
-        'Responsive Web Design',
-        'Modern Frontend Tools',
+        "HTML5 & CSS3",
+        "JavaScript ES6+",
+        "React.js Development",
+        "Responsive Web Design",
+        "Modern Frontend Tools",
       ],
     },
     {
-      title: 'Immersive Python Bootcamp Premium',
-      description: 'Intensive premium bootcamp covering Python fundamentals, data structures, web development, and advanced programming concepts.',
-      thumbnail: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400',
+      title: "Immersive Python Bootcamp Premium",
+      description:
+        "Intensive premium bootcamp covering Python fundamentals, data structures, web development, and advanced programming concepts.",
+      thumbnail:
+        "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400",
       certificate: pythonCertificate,
-      duration: 'Certificate',
-      students: 'Completed',
+      duration: "Certificate",
+      students: "Completed",
       rating: 5.0,
-      level: 'Intermediate',
-      price: 'Certified',
+      level: "Intermediate",
+      price: "Certified",
       features: [
-        'Python Fundamentals',
-        'Data Structures & Algorithms',
-        'Web Development with Flask',
-        'Database Integration',
-        'API Development',
+        "Python Fundamentals",
+        "Data Structures & Algorithms",
+        "Web Development with Flask",
+        "Database Integration",
+        "API Development",
       ],
     },
   ];
 
   const achievements = [
-    { icon: Users, value: '1+', label: 'Year Experience' },
-    { icon: Star, value: 'React.js', label: 'Specialization' },
-    { icon: Award, value: '2+', label: 'Certifications' },
-    { icon: Play, value: '10+', label: 'Projects Built' },
+    { icon: Users, value: "1+", label: "Year Experience" },
+    { icon: Star, value: "React.js", label: "Specialization" },
+    { icon: Award, value: "2+", label: "Certifications" },
+    { icon: Play, value: "10+", label: "Projects Built" },
   ];
 
   // Modal close handler
@@ -70,10 +74,12 @@ const CourseSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gradient">Completed Courses</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gradient">
+            Completed Courses
+          </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Continuous learning and professional development through specialized courses 
-            and certifications in frontend development.
+            Continuous learning and professional development through specialized
+            courses and certifications in frontend development.
           </p>
         </motion.div>
 
@@ -90,8 +96,12 @@ const CourseSection = () => {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <achievement.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1">{achievement.value}</div>
-              <div className="text-xs sm:text-sm text-muted-foreground px-1">{achievement.label}</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1">
+                {achievement.value}
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground px-1">
+                {achievement.label}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -159,10 +169,15 @@ const CourseSection = () => {
 
               {/* Course Features */}
               <div className="mb-6">
-                <h4 className="font-semibold text-sm mb-3 text-foreground">What you'll learn:</h4>
+                <h4 className="font-semibold text-sm mb-3 text-foreground">
+                  What you'll learn:
+                </h4>
                 <ul className="space-y-1">
                   {course.features.slice(0, 3).map((feature, i) => (
-                    <li key={i} className="text-sm text-muted-foreground flex items-center">
+                    <li
+                      key={i}
+                      className="text-sm text-muted-foreground flex items-center"
+                    >
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 flex-shrink-0"></div>
                       {feature}
                     </li>
@@ -194,7 +209,7 @@ const CourseSection = () => {
           >
             <div
               className="relative bg-white rounded-lg shadow-lg max-w-lg w-full p-4"
-              onClick={e => e.stopPropagation()} // Prevent closing when clicking inside modal
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
             >
               <button
                 className="absolute top-2 right-2 text-gray-600 hover:text-red-500"
@@ -206,16 +221,21 @@ const CourseSection = () => {
               <img
                 src={
                   openIndex === 0
-                    ? `${import.meta.env.BASE_URL}src/assets/Frontend-certificate.jpg`
-                    : `${import.meta.env.BASE_URL}src/assets/python-certificate.jpg`
+                    ? import.meta.env.BASE_URL +
+                      "src/assets/Frontend-certificate.jpg"
+                    : import.meta.env.BASE_URL +
+                      "src/assets/python-certificate.jpg"
                 }
-                alt="Certificate"
+                alt={
+                  openIndex === 0
+                    ? "Frontend Certificate"
+                    : "Python Certificate"
+                }
                 className="w-full h-auto rounded"
               />
             </div>
           </div>
         )}
-
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
-import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface SocialIconsProps {
   className?: string;
@@ -9,37 +9,43 @@ interface SocialIconsProps {
   showAll?: boolean;
 }
 
-const SocialIcons = ({ className = '', iconSize = 20, showLabels = false, delay = 0, showAll = true }: SocialIconsProps) => {
+const SocialIcons = ({
+  className = "",
+  iconSize = 20,
+  showLabels = false,
+  delay = 0,
+  showAll = true,
+}: SocialIconsProps) => {
   const allSocialLinks = [
     {
-      name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/vasanthakumar-jpg/',
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/vasanthakumar-rajendran-83993422b/",
       icon: Linkedin,
-      className: 'social-linkedin',
+      className: "social-linkedin",
     },
     {
-      name: 'GitHub',
-      href: 'https://github.com/vasanthakumar-jpg',
+      name: "GitHub",
+      href: "https://github.com/vasanthakumar-jpg",
       icon: Github,
-      className: 'social-github',
+      className: "social-github",
     },
     {
-      name: 'Instagram',
-      href: 'https://www.instagram.com/vasantha_kumar_jpg/',
+      name: "Instagram",
+      href: "https://www.instagram.com/vasanth_vasu_vv/",
       icon: Instagram,
-      className: 'social-instagram',
+      className: "social-instagram",
     },
     {
-      name: 'Email',
-      href: 'mailto:vasanthakumar141099@gmail.com',
+      name: "Email",
+      href: "mailto:vasanthakumar141099@gmail.com",
       icon: Mail,
-      className: 'social-mail',
+      className: "social-mail",
     },
   ];
 
   const limitedSocialLinks = [
     allSocialLinks[0], // LinkedIn
-    allSocialLinks[2], // Instagram  
+    allSocialLinks[2], // Instagram
     allSocialLinks[3], // Email
   ];
 
@@ -51,15 +57,15 @@ const SocialIcons = ({ className = '', iconSize = 20, showLabels = false, delay 
         <motion.a
           key={social.name}
           href={social.href}
-          target={social.href !== '#' ? '_blank' : '_self'}
-          rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
+          target={social.href !== "#" ? "_blank" : "_self"}
+          rel={social.href !== "#" ? "noopener noreferrer" : undefined}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ 
+          transition={{
             delay: delay + index * 0.1,
-            type: 'spring',
+            type: "spring",
             stiffness: 200,
-            damping: 15
+            damping: 15,
           }}
           className={`social-icon ${social.className}`}
           aria-label={`Visit ${social.name} profile`}

@@ -1,22 +1,31 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { motion } from "framer-motion";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center section-padding bg-gradient-hero relative overflow-hidden bg-center bg-cover pt-24 lg:pt-28">
+    <section
+      id="home"
+      className="min-h-screen flex items-center section-padding bg-gradient-hero relative overflow-hidden bg-center bg-cover pt-24 lg:pt-28"
+    >
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-float" style={{ animationDelay: '4s' }}></div>
+        <div
+          className="absolute top-40 right-20 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl animate-float"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute -bottom-8 left-40 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-float"
+          style={{ animationDelay: "4s" }}
+        ></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -32,21 +41,21 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-white/80 font-medium mb-4" 
-               style={{
-                fontSize: 'clamp(1rem, 3vw, 1.25rem)'
+              className="text-white/80 font-medium mb-4"
+              style={{
+                fontSize: "clamp(1rem, 3vw, 1.25rem)",
               }}
             >
               Hello, I'm
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="font-bold text-white mb-6 leading-tight whitespace-nowrap"
               style={{
-                fontSize: 'clamp(1.75rem, 7vw, 3.5rem)'
+                fontSize: "clamp(1.75rem, 7vw, 3.5rem)",
               }}
             >
               Vasanthakumar
@@ -56,7 +65,7 @@ const HeroSection = () => {
                 transition={{ delay: 1.2 }}
                 className="block font-normal text-white/90 mt-2"
                 style={{
-                  fontSize: 'clamp(1.25rem, 5vw, 2.5rem)'
+                  fontSize: "clamp(1.25rem, 5vw, 2.5rem)",
                 }}
               >
                 Front-End Developer
@@ -69,10 +78,11 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
               className="text-white/80 mb-8 leading-relaxed max-w-lg text-left"
               style={{
-                fontSize: 'clamp(1rem, 3vw, 1.25rem)'
+                fontSize: "clamp(1rem, 3vw, 1.25rem)",
               }}
             >
-              I create responsive and modern web interfaces using React and Material UI.
+              I create responsive and modern web interfaces using React and
+              Material UI.
             </motion.p>
 
             <motion.div
@@ -82,14 +92,14 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4 mb-8"
             >
               <Button
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => scrollToSection("#contact")}
                 className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 rounded-lg shadow-glow transition-all duration-300 hover:scale-105"
               >
                 Get In Touch
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button
-                onClick={() => scrollToSection('#about')}
+                onClick={() => scrollToSection("#about")}
                 className="btn-outline-hero border-white/30 text-white hover:bg-white/10"
               >
                 Learn More
@@ -105,9 +115,15 @@ const HeroSection = () => {
               <span className="text-white/60 text-sm">Follow me:</span>
               <div className="flex gap-4">
                 {[
-                  { icon: Github, href: 'https://github.com/vasanthakumar-jpg' },
-                  { icon: Linkedin, href: 'https://www.linkedin.com/in/vasanthakumar-rajendran-83993422b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
-                  { icon: Mail, href: 'mailto:vasanthakumar141099@gmail.com' },
+                  {
+                    icon: Github,
+                    href: "https://github.com/vasanthakumar-jpg",
+                  },
+                  {
+                    icon: Linkedin,
+                    href: "https://www.linkedin.com/in/vasanthakumar-rajendran-83993422b/",
+                  },
+                  { icon: Mail, href: "mailto:vasanthakumar141099@gmail.com" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
@@ -133,14 +149,14 @@ const HeroSection = () => {
           >
             <div className="relative z-20">
               <img
-                src={`${import.meta.env.BASE_URL}src/assets/profile-hero.jpg`}
+                src={import.meta.env.BASE_URL + "src/assets/profile-hero.jpg"}
                 alt="Vasantha Kumar - Front-End Developer"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
               />
               {/* Decorative frame */}
               <div className="absolute -inset-4 bg-white/20 rounded-3xl -z-10 blur-sm"></div>
             </div>
-            
+
             {/* Floating elements - hidden on mobile */}
             <motion.div
               animate={{ y: [-10, 10, -10] }}
@@ -149,13 +165,22 @@ const HeroSection = () => {
             >
               <span className="text-white font-bold text-sm">1+</span>
             </motion.div>
-            
+
             <motion.div
               animate={{ y: [10, -10, 10] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
               className="flex absolute bottom-2 -right-2 md:-right-0 w-16 h-16 md:w-20 md:h-20 bg-secondary/30 rounded-full items-center justify-center backdrop-blur-sm z-50"
             >
-              <span className="text-white font-bold text-xs text-center ">10+<br/>Projects</span>
+              <span className="text-white font-bold text-xs text-center ">
+                10+
+                <br />
+                Projects
+              </span>
             </motion.div>
           </motion.div>
         </div>
