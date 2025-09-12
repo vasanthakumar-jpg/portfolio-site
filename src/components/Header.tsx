@@ -41,7 +41,7 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container-custom">
+      <div className="container-custom overflow-hidden">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div
@@ -53,12 +53,12 @@ const Header = () => {
             <img
               src={import.meta.env.BASE_URL + "assets/logo1.png"}
               alt="Logo"
-              className="w-28 md:w-36 h-14 md:h-20 mr-2"
+              className="w-32 md:w-36 h-24 lg:w-48 overflow-hidden object-contain"
             />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+          <nav className="hidden md:flex items-center space-x-3.5 lg:space-x-6 ">
             {navItems.map((item, index) => (
               <motion.button
                 type="button"
@@ -67,7 +67,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
                 onClick={() => scrollToSection(item.href)}
-                className="nav-link font-medium text-sm lg:text-base px-2"
+                className="nav-link font-medium text-sm lg:text-base px-2 "
               >
                 {item.label}
               </motion.button>
@@ -107,15 +107,15 @@ const Header = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors focus:outline-none "
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-8 h-8" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-8 h-8 border-none outline-none focus:outline-none" />
             )}
           </motion.button>
         </div>

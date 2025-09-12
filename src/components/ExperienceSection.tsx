@@ -39,15 +39,17 @@ const ExperienceSection = () => {
 
   const projects = [
     {
-      title: "B.Tech – Computer Science and Engineering",
+      title: "BE – Computer Science and Engineering",
       client: "Nandha Engineering College",
       description:
         "Major in Computer Science and Engineering from Nandha Engineering College (NEC), a private institution established in 2001 in Erode, Tamil Nadu.",
       technologies: [
-        "Data Structures",
-        "Algorithms",
-        "Database Systems",
-        "Software Engineering",
+        "C++",
+        "Python",
+        "Java",
+        "Artificial Intelligence",
+        "Operating System",
+        "Data Structures and Algorithms",
       ],
       results: "2017 - 2021",
       link: "#",
@@ -57,7 +59,13 @@ const ExperienceSection = () => {
       client: "Vidhya Vikas Matric Hr. Sec. School",
       description:
         "Higher Secondary Certificate in Computer Science. The school is known for its academic excellence and commitment to holistic education.",
-      technologies: ["Computer Science", "Mathematics", "Physics"],
+      technologies: [
+        "Computer Science",
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        " English",
+      ],
       results: "Completed 2017",
       link: "#",
     },
@@ -66,7 +74,13 @@ const ExperienceSection = () => {
       client: "Vidhya Vikas Matric Hr. Sec. School",
       description:
         "Secondary School Leaving Certificate. The school is known for its academic excellence and commitment to holistic education.",
-      technologies: ["Mathematics", "Science", "English"],
+      technologies: [
+        "Mathematics",
+        "Science",
+        "English",
+        "Social Science",
+        " Tamil",
+      ],
       results: "Completed 2015",
       link: "#",
     },
@@ -114,7 +128,7 @@ const ExperienceSection = () => {
 
                 {/* Content */}
                 <div
-                  className={`card-portfolio ml-8 sm:ml-20 md:ml-0 md:w-[45%] ${
+                  className={`card-portfolio ml-8 sm:ml-20 md:ml-0 md:w-[45%] shadow-xl border hover:border-gray-300 hover:shadow-2xl transition-all duration-300 ${
                     index % 2 === 0
                       ? "md:mr-auto md:pr-12"
                       : "md:ml-auto md:pl-12"
@@ -165,14 +179,14 @@ const ExperienceSection = () => {
           <h3 className="h3-responsive font-bold mb-12 text-center">
             Education
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-end">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-end ">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                className="card-portfolio group cursor-pointer"
+                className="card-portfolio group cursor-pointer shadow-xl border my-1 hover:border-gray-300 hover:shadow-2xl transition-all duration-300"
                 onClick={() =>
                   setExpandedProject(expandedProject === index ? null : index)
                 }
@@ -217,7 +231,7 @@ const ExperienceSection = () => {
                     className="border-t border-border pt-4 mt-4"
                   >
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech, i) => (
+                      {project.technologies.slice(3).map((tech, i) => (
                         <span
                           key={i}
                           className="text-xs bg-secondary/10 text-secondary px-2 py-1 rounded-full"

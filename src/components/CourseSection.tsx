@@ -112,7 +112,7 @@ const CourseSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              className="card-portfolio group overflow-hidden"
+              className="card-portfolio group overflow-hidden shadow-xl border my-1 hover:border-gray-300 hover:shadow-2xl transition-all duration-300  "
             >
               {/* Course Thumbnail */}
               <div className="relative mb-6 rounded-lg overflow-hidden">

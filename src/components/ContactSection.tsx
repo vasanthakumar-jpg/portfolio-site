@@ -1,73 +1,81 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Send, MapPin, Phone, Mail, Clock, MessageCircle, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import FormField from '@/components/ui/form-field';
-import { useToast } from '@/hooks/use-toast';
-import emailjs from '@emailjs/browser';
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  Send,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageCircle,
+  User,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import FormField from "@/components/ui/form-field";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const { toast } = useToast();
-  
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const [formErrors, setFormErrors] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
     const errors = {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
     };
 
     if (!formData.name.trim()) {
-      errors.name = 'Name is required';
+      errors.name = "Name is required";
     } else if (formData.name.trim().length < 2) {
-      errors.name = 'Name must be at least 2 characters';
+      errors.name = "Name must be at least 2 characters";
     }
 
     if (!formData.email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
+      errors.email = "Please enter a valid email address";
     }
 
     if (!formData.subject.trim()) {
-      errors.subject = 'Subject is required';
+      errors.subject = "Subject is required";
     } else if (formData.subject.trim().length < 5) {
-      errors.subject = 'Subject must be at least 5 characters';
+      errors.subject = "Subject must be at least 5 characters";
     }
 
     if (!formData.message.trim()) {
-      errors.message = 'Message is required';
+      errors.message = "Message is required";
     } else if (formData.message.trim().length < 10) {
-      errors.message = 'Message must be at least 10 characters';
+      errors.message = "Message must be at least 10 characters";
     }
 
     setFormErrors(errors);
-    return !Object.values(errors).some(error => error !== '');
+    return !Object.values(errors).some((error) => error !== "");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast({
         title: "Please fix the errors",
@@ -76,32 +84,32 @@ const ContactSection = () => {
       });
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       // Replace with your EmailJS service ID, template ID, and public key
       await emailjs.send(
-        'service_mgre1dp', // Service ID
-        'template_20ayj9l', // Template ID
+        "service_mgre1dp", // Service ID
+        "template_20ayj9l", // Template ID
         {
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone,
           subject: formData.subject,
           message: formData.message,
-          to_name: 'Vasantha Kumar',
+          to_name: "Vasantha Kumar",
         },
-        'GKZm7xj6m5yOXE1FG' // Public key
+        "GKZm7xj6m5yOXE1FG" // Public key
       );
-      
+
       toast({
         title: "Message sent successfully!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      setFormErrors({ name: '', email: '', subject: '', message: '' });
+
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setFormErrors({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       toast({
         title: "Failed to send message",
@@ -109,22 +117,24 @@ const ContactSection = () => {
         variant: "destructive",
       });
     }
-    
+
     setIsSubmitting(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-    
+
     // Clear error when user starts typing
     if (formErrors[name as keyof typeof formErrors]) {
       setFormErrors({
         ...formErrors,
-        [name]: '',
+        [name]: "",
       });
     }
   };
@@ -132,31 +142,31 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Location',
-      details: 'Tiruppur, Tamil Nadu, India',
-      subtitle: 'Available for remote work globally',
-      color: 'text-primary'
+      title: "Location",
+      details: "Tiruppur, Tamil Nadu, India",
+      subtitle: "Available for remote work globally",
+      color: "text-primary",
     },
     {
       icon: Phone,
-      title: 'Phone',
-      details: '+91 7339232817',
-      subtitle: 'Mon-SAT 10AM-7PM IST',
-      color: 'text-secondary'
+      title: "Phone",
+      details: "+91 7339232817",
+      subtitle: "Mon-SAT 10AM-7PM IST",
+      color: "text-secondary",
     },
     {
       icon: Mail,
-      title: 'Email',
-      details: 'vasanthakumar141099@gmail.com',
-      subtitle: 'Best way to reach me',
-      color: 'text-accent'
+      title: "Email",
+      details: "vasanthakumar141099@gmail.com",
+      subtitle: "Best way to reach me",
+      color: "text-accent",
     },
     {
       icon: Clock,
-      title: 'Response Time',
-      details: 'Within 24 hours',
-      subtitle: 'Usually much faster',
-      color: 'text-primary'
+      title: "Response Time",
+      details: "Within 24 hours",
+      subtitle: "Usually much faster",
+      color: "text-primary",
     },
   ];
 
@@ -169,27 +179,29 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="h2-responsive font-bold mb-6 text-gradient">Get In Touch</h2>
+          <h2 className="h2-responsive font-bold mb-6 text-gradient">
+            Get In Touch
+          </h2>
           <p className="text-responsive-lg text-muted-foreground max-w-3xl mx-auto">
-            Have a project in mind or just want to chat? I'd love to hear from you. 
-            Let's create something amazing together.
+            Have a project in mind or just want to chat? I'd love to hear from
+            you. Let's create something amazing together.
           </p>
         </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-            {/* Personal Details - Left Side */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
-            >
-              <div>
-                <h3 className="text-responsive-xl font-bold mb-6 flex items-center">
-                  <User className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-primary flex-shrink-0" />
-                  Contact Information
-                </h3>
-              
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+          {/* Personal Details - Left Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-8"
+          >
+            <div>
+              <h3 className="text-responsive-xl font-bold mb-6 flex items-center">
+                <User className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-primary flex-shrink-0" />
+                Contact Information
+              </h3>
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -200,13 +212,23 @@ const ContactSection = () => {
                     className="group"
                   >
                     <div className="flex items-start space-x-4 p-4 rounded-xl hover:bg-card transition-all duration-300 hover:shadow-soft">
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-background rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-soft`}>
-                        <info.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${info.color}`} />
+                      <div
+                        className={`w-10 h-10 sm:w-12 sm:h-12 bg-slate-200 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-soft`}
+                      >
+                        <info.icon
+                          className={`w-5 h-5 sm:w-6 sm:h-6  ${info.color}`}
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-foreground mb-1 text-responsive-sm">{info.title}</h4>
-                        <p className="text-foreground font-medium text-responsive-sm break-words">{info.details}</p>
-                        <p className="text-muted-foreground text-responsive-xs">{info.subtitle}</p>
+                        <h4 className="font-semibold text-foreground mb-1 text-responsive-sm">
+                          {info.title}
+                        </h4>
+                        <p className="text-foreground font-medium text-responsive-sm break-words">
+                          {info.details}
+                        </p>
+                        <p className="text-muted-foreground text-responsive-xs">
+                          {info.subtitle}
+                        </p>
                       </div>
                     </div>
                   </motion.div>
@@ -223,9 +245,12 @@ const ContactSection = () => {
             >
               <div className="text-center">
                 <MessageCircle className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h4 className="font-semibold mb-2 text-responsive-sm">Available for Work</h4>
+                <h4 className="font-semibold mb-2 text-responsive-sm">
+                  Available for Work
+                </h4>
                 <p className="text-muted-foreground text-responsive-xs mb-4">
-                  Open to new opportunities and exciting projects. Let's discuss how we can work together.
+                  Open to new opportunities and exciting projects. Let's discuss
+                  how we can work together.
                 </p>
               </div>
             </motion.div>
@@ -267,12 +292,15 @@ const ContactSection = () => {
         >
           <div className="card-portfolio max-w-7xl mx-auto lg:mt-32">
             <div className="text-center mb-8">
-              <h3 className="h3-responsive font-bold mb-4">Send Me a Message</h3>
+              <h3 className="h3-responsive font-bold mb-4">
+                Send Me a Message
+              </h3>
               <p className="text-muted-foreground text-responsive-sm">
-                Fill out the form below and I'll get back to you as soon as possible.
+                Fill out the form below and I'll get back to you as soon as
+                possible.
               </p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="grid md:grid-cols-2 gap-6">
                 <motion.div
@@ -293,7 +321,7 @@ const ContactSection = () => {
                     autoComplete="name"
                   />
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -331,8 +359,7 @@ const ContactSection = () => {
                 />
               </motion.div>
 
-              <div className="grid md:grid-cols-1 gap-6">
-              </div>
+              <div className="grid md:grid-cols-1 gap-6"></div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -382,7 +409,9 @@ const ContactSection = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className="btn-hero px-12 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] w-full sm:w-auto"
-                  aria-describedby={isSubmitting ? "form-submitting" : undefined}
+                  aria-describedby={
+                    isSubmitting ? "form-submitting" : undefined
+                  }
                 >
                   {isSubmitting ? (
                     <>
