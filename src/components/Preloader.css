@@ -1,0 +1,35 @@
+/* Reserve the existing scrollbar gutter before the first paint and through exit. */
+html { scrollbar-gutter: stable; }
+.logo-preloader {
+  --loader-surface: 204 45.45% 97.84%; /* #f7fafc */
+  --loader-teal: 167.41 60.9% 26.08%; /* #1a6b5a */
+  --loader-blue: 211.43 67.74% 36.47%; /* #1e5a9c */
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  color: hsl(var(--loader-blue));
+}
+.preloader-curtain { position: absolute; top: 0; bottom: 0; width: calc(50% + 1px); background: linear-gradient(160deg, hsl(var(--loader-surface)), hsl(190 35% 96.5%)); }
+.preloader-curtain-left { left: 0; }
+.preloader-curtain-right { right: 0; background: linear-gradient(200deg, hsl(var(--loader-surface)), hsl(190 35% 96.5%)); }
+.preloader-glow { position: absolute; width: min(85vw, 680px); aspect-ratio: 1; border-radius: 50%; pointer-events: none; background: radial-gradient(ellipse, hsl(var(--loader-teal) / 0.075), hsl(var(--loader-blue) / 0.025) 45%, transparent 70%); }
+.preloader-grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' opacity='.5' d='M0 0h120v120H0z'/%3E%3C/svg%3E"); background-size: 120px 120px; }
+.preloader-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 30px; min-width: 0; max-width: 100%; }
+.preloader-logo { display: block; width: 280px; max-width: 100%; height: auto; object-fit: contain; }
+.preloader-logo-float { max-width: 100%; }
+.preloader-indicator { width: 160px; }
+.preloader-progress-track { height: 3px; border-radius: 8px; background: hsl(var(--loader-blue) / 0.09); overflow: hidden; }
+.preloader-progress-fill { display: block; height: 100%; border-radius: inherit; transform-origin: left; background: linear-gradient(90deg, hsl(var(--loader-teal)), hsl(var(--loader-blue))); }
+.preloader-progress-label { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; font-weight: 400; line-height: 1.5; font-variant-numeric: tabular-nums; color: hsl(var(--loader-blue)); }
+.logo-preloader-reduced { pointer-events: none; }
+@media (min-width: 768px) { .preloader-logo { width: 420px; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-preloader { pointer-events: none; }
+  .preloader-curtain, .preloader-logo-float, .preloader-logo, .preloader-content, .preloader-glow { transform: none !important; }
+}

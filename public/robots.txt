@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://vasanthakumar-jpg.github.io/portfolio-site/sitemap.xml

@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { profile, skillGroups } from '@/data/portfolio';
 
 interface SEOHeadProps {
   title?: string;
@@ -9,21 +10,18 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({ 
-  title = "Vasantha Kumar - Frontend Developer Portfolio",
-  description = "Frontend Developer specializing in React, Material UI, and modern web technologies. View my projects, experience, and get in touch for collaboration opportunities.",
-  image = "/profile-hero.jpg",
-  url = "https://vasanthakumar-portfolio.com",
-  type = "website"
+  title = "Vasanthakumar Rajendran | React & Shopify Developer",
+  description = "Front-End Developer building React interfaces and Shopify storefronts with Liquid, responsive UI, API integration, testing, and technical SEO.",
+  image = profile.siteUrl + "assets/profile-hero.jpg",
+  url = profile.siteUrl,
+  type = "profile"
 }: SEOHeadProps) => {
   return (
     <Helmet>
       {/* Primary Meta Tags */}
       <title>{title}</title>
-      <meta name="title" content={title} />
       <meta name="description" content={description} />
-      <meta name="keywords" content="Frontend Developer, React Developer, Material UI, Web Development, JavaScript, TypeScript, Portfolio, Vasantha Kumar" />
-      <meta name="author" content="Vasantha Kumar" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="author" content={profile.name} />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
 
@@ -33,35 +31,37 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Vasantha Kumar Portfolio" />
+      <meta property="og:image:alt" content="Portfolio portrait" />
+      <meta property="og:site_name" content={`${profile.name} Portfolio`} />
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
-      <meta property="twitter:title" content={title} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={image} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={url} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content="Portfolio portrait" />
 
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "@id": url + "#profile",
+          "mainEntity": {
           "@type": "Person",
-          "name": "Vasantha Kumar",
-          "jobTitle": "Frontend Developer",
+          "@id": url + "#person",
+          "name": profile.name,
+          "jobTitle": "Web Developer & E-commerce Executive",
           "description": description,
           "url": url,
           "image": image,
+          "email": profile.email,
           "sameAs": [
-            "https://www.linkedin.com/in/vasanthakumar-jpg/",
-            "https://github.com/vasanthakumar-jpg"
+            profile.linkedin,
+            profile.github
           ],
-          "knowsAbout": ["React", "JavaScript", "TypeScript", "Material UI", "Frontend Development", "Web Development"],
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Chennai",
-            "addressRegion": "Tamil Nadu",
-            "addressCountry": "India"
+          "knowsAbout": skillGroups.flatMap(group => group.items)
           }
         })}
       </script>

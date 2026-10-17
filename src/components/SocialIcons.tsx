@@ -1,5 +1,7 @@
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { profile } from "@/data/portfolio";
+import { useAnimationPreferences } from "./motion/preferences";
 
 interface SocialIconsProps {
   className?: string;
@@ -16,28 +18,23 @@ const SocialIcons = ({
   delay = 0,
   showAll = true,
 }: SocialIconsProps) => {
+  const { reducedMotion, finePointer } = useAnimationPreferences();
   const allSocialLinks = [
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/vasanthakumar-rajendran-83993422b/",
+      href: profile.linkedin,
       icon: Linkedin,
       className: "social-linkedin",
     },
     {
       name: "GitHub",
-      href: "https://github.com/vasanthakumar-jpg",
+      href: profile.github,
       icon: Github,
       className: "social-github",
     },
     {
-      name: "Instagram",
-      href: "https://www.instagram.com/vasanth_vasu_vv/",
-      icon: Instagram,
-      className: "social-instagram",
-    },
-    {
       name: "Email",
-      href: "mailto:vasanthakumar141099@gmail.com",
+      href: `mailto:${profile.email}`,
       icon: Mail,
       className: "social-mail",
     },
@@ -45,8 +42,8 @@ const SocialIcons = ({
 
   const limitedSocialLinks = [
     allSocialLinks[0], // LinkedIn
-    allSocialLinks[2], // Instagram
-    allSocialLinks[3], // Email
+    allSocialLinks[1], // GitHub
+    allSocialLinks[2], // Email
   ];
 
   const socialLinks = showAll ? allSocialLinks : limitedSocialLinks;
@@ -57,22 +54,23 @@ const SocialIcons = ({
         <motion.a
           key={social.name}
           href={social.href}
-          target={social.href !== "#" ? "_blank" : "_self"}
-          rel={social.href !== "#" ? "noopener noreferrer" : undefined}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
+          target={social.href.startsWith("https://") ? "_blank" : undefined}
+          rel={social.href.startsWith("https://") ? "noopener noreferrer" : undefined}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{
-            delay: delay + index * 0.1,
+            delay: reducedMotion ? 0 : delay + index * 0.1,
             type: "spring",
             stiffness: 200,
             damping: 15,
           }}
           className={`social-icon ${social.className}`}
-          aria-label={`Visit ${social.name} profile`}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          aria-label={social.name === "Email" ? "Email Vasanthakumar" : `Visit ${social.name} profile`}
+          whileHover={finePointer && !reducedMotion ? { y: -3, rotate: 8, scale: 1.06 } : undefined}
+          whileTap={reducedMotion ? undefined : { scale: 0.95 }}
         >
-          <social.icon size={iconSize} />
+          <social.icon aria-hidden="true" size={iconSize} />
           {showLabels && (
             <span className="ml-2 text-sm font-medium">{social.name}</span>
           )}

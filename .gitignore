@@ -12,6 +12,19 @@ dist
 dist-ssr
 *.local
 
+# Local configuration and verification artifacts
+.env
+.env.*
+!.env.example
+coverage/
+playwright-report/
+test-results/
+audit-artifacts/
+.verification/
+*.tsbuildinfo
+Vasanthakumar_Resume.docx
+*.docx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

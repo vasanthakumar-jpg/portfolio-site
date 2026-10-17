@@ -1,37 +1,18 @@
-import { motion } from 'framer-motion';
-import { Heart, ArrowUp } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import SocialIcons from './SocialIcons';
+import { profile } from '@/data/portfolio';
+import { Reveal } from './motion/primitives';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-foreground text-background relative">
-      {/* Scroll to top button */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        onClick={scrollToTop}
-        className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-glow hover:scale-110 transition-transform duration-300"
-      >
-        <ArrowUp className="w-5 h-5 text-white" />
-      </motion.button>
-
       <div className="container-custom py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <h3 className="text-2xl font-bold text-gradient mb-4">Vasantha Kumar</h3>
+        <Reveal className="text-center">
+          <h3 className="text-2xl font-bold text-gradient mb-4">{profile.name}</h3>
           <p className="text-background/70 mb-6 max-w-md mx-auto">
-            Frontend Developer passionate about creating exceptional user experiences. 
-            Always eager to learn and grow in the tech industry.
+            React interfaces, Shopify storefronts, and responsive e-commerce experiences.
           </p>
           
           <SocialIcons 
@@ -40,19 +21,26 @@ const Footer = () => {
             iconSize={22}
             showAll={true}
           />
+          <nav aria-label="Portfolio sections" className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-8">
+            <a href="#projects" className="footer-link">Projects</a>
+            <a href="#skills" className="footer-link">Skills</a>
+            <a href="#course" className="footer-link">Certifications</a>
+            <a href="#education" className="footer-link">Education</a>
+            <a href={import.meta.env.BASE_URL + profile.resumePath} download={profile.resumePath} className="footer-link">Download Resume</a>
+          </nav>
           
           <div className="flex items-center justify-center text-sm text-background/60 mb-4">
             <span>Made with</span>
-            <Heart className="w-4 h-4 mx-1 text-red-400 fill-current" />
+            <Heart aria-hidden="true" className="footer-heart w-4 h-4 mx-1 text-red-400 fill-current" />
             <span>using React & Tailwind CSS</span>
           </div>
           
           <div className="pt-4 border-t border-background/10">
             <p className="text-background/60 text-sm">
-              © {currentYear} VasanthaKumar. All rights reserved.
+              © {currentYear} {profile.name}. All rights reserved.
             </p>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </footer>
   );
