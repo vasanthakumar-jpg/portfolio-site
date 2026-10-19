@@ -43,6 +43,7 @@ const HeroSection = () => {
             </motion.h1>
             <motion.p {...reveal(14, 2)} data-hero-reveal className="hero-role"><RotatingRole headline={profile.headline} /></motion.p>
             <motion.p {...reveal(12, 3)} data-hero-reveal className="hero-description">{profile.summary}</motion.p>
+            <motion.p {...reveal(10, 3.5)} data-hero-reveal className="hero-service-statement">I also build professional, responsive portfolio and business websites tailored to your needs and budget.</motion.p>
             <motion.div {...reveal(10, 4)} data-hero-reveal className="hero-actions">
               <MagneticButton introDelay={0.4}><Button asChild className="hero-action hero-action-primary bg-white text-primary hover:bg-white">
                 <a href="#projects">View Projects<ArrowRight aria-hidden="true" className="hero-action-arrow" /></a>

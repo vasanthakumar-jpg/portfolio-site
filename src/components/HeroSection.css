@@ -40,7 +40,8 @@
 .hero-eyebrow { margin-bottom: 1rem; color: hsl(0 0% 100% / 0.9); font-size: clamp(1rem, 1.6vw, 1.2rem); font-weight: 500; }
 .hero-name { margin: 0 0 1rem; font-size: clamp(2rem, 4.6vw, 3.75rem); font-weight: 750; line-height: 1.08; letter-spacing: -0.035em; overflow-wrap: normal; }
 .hero-role { margin-bottom: 1.5rem; font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 500; line-height: 1.55; color: hsl(0 0% 100% / 0.95); }
-.hero-description { max-width: 36rem; margin-bottom: 2rem; font-size: clamp(1rem, 1.3vw, 1.125rem); line-height: 1.8; color: hsl(0 0% 100% / 0.92); }
+.hero-description { max-width: 36rem; margin-bottom: 0.875rem; font-size: clamp(1rem, 1.3vw, 1.125rem); line-height: 1.8; color: hsl(0 0% 100% / 0.92); }
+.hero-service-statement { max-width: 36rem; margin-bottom: 2rem; font-size: clamp(0.9375rem, 1.15vw, 1rem); line-height: 1.7; color: hsl(0 0% 100% / 0.8); }
 .hero-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; }
 
 #home .hero-action {
