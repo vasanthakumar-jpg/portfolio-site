@@ -14,18 +14,18 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 .cursor-glow { position: fixed; width: 300px; height: 300px; top: 0; left: 0; pointer-events: none; z-index: 35; background: radial-gradient(circle, hsl(var(--motion-teal) / 0.07), hsl(var(--motion-blue) / 0.035) 35%, transparent 70%); }
 .ambient-section { position: relative; isolation: isolate; overflow: clip; }
 .ambient-section > .container-custom { position: relative; z-index: 1; }
-.ambient-section::before { content: ""; position: absolute; right: -5rem; top: 10%; width: min(65vw, 650px); aspect-ratio: 1; pointer-events: none; background: radial-gradient(circle, hsl(var(--secondary) / 0.08), hsl(var(--primary) / 0.025) 45%, transparent 70%); animation: section-drift 20s ease-in-out infinite alternate; }
+.ambient-section::before { display: none; }
 @keyframes section-drift { to { transform: translate3d(-20px, 30px, 0); } }
 .section-heading { position: relative; text-align: center; }
-.header-surface { position: absolute; inset: 0; background: hsl(var(--background) / 0.88); backdrop-filter: blur(14px); transform-origin: top; border-bottom: 1px solid hsl(var(--border) / 0.5); }
+.header-surface { position: absolute; inset: 0; background: hsl(var(--background) / 0.97); backdrop-filter: blur(6px); transform-origin: top; border-bottom: 1px solid hsl(var(--border)); }
 .header-shadow { position: absolute; inset: 0; pointer-events: none; box-shadow: var(--shadow-soft); transition: opacity 0.25s; }
 .nav-active-pill { position: absolute; inset: 0; border-radius: 8px; background: hsl(var(--secondary) / 0.13); border-bottom: 2px solid hsl(var(--motion-teal)); }
 .mobile-nav-drawer { position: relative; }
-.section-heading h2, .section-heading h3 { line-height: 1.3; padding-block: 0.08em; }
+.section-heading h2, .section-heading h3 { line-height: 1.3; padding-block: 0.08em; font-weight: 650; letter-spacing: -0.02em; }
 .heading-underline { display: block; width: 64px; height: 3px; margin: 0.7rem auto 0; border-radius: 3px; background: var(--motion-gradient); transform-origin: center; }
 .tilt-card { position: relative; isolation: isolate; overflow: hidden; transform-style: flat; }
 .tilt-card > :not(.card-spotlight) { position: relative; z-index: 1; }
-.tilt-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; border: 1px solid hsl(var(--motion-teal) / 0.5); box-shadow: inset 0 0 28px hsl(var(--motion-teal) / 0.07); opacity: 0; transition: opacity 0.25s var(--motion-ease); }
+.tilt-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; border: 1px solid hsl(var(--motion-teal) / 0.25); opacity: 0; transition: opacity 0.25s var(--motion-ease); }
 .card-spotlight { pointer-events: none; position: absolute; top: 0; left: 0; width: 300px; height: 300px; background: radial-gradient(circle, hsl(var(--secondary) / 0.13), transparent 68%); z-index: 0; }
 .magnetic-control { position: relative; display: inline-flex; vertical-align: middle; max-width: 100%; border-radius: 0.7rem; }
 .magnetic-control > a, .magnetic-control > button { width: 100%; }
@@ -38,7 +38,7 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 :root .btn-hero:hover { transform: none; box-shadow: var(--shadow-glow); }
 .shimmer-button::after { content: ""; position: absolute; inset: -40% -100%; background: linear-gradient(110deg, transparent 40%, hsl(0 0% 100% / 0.22), transparent 60%); transform: translateX(-45%); pointer-events: none; opacity: 0; }
 :root a, :root button { -webkit-tap-highlight-color: transparent; }
-:root button:active:not(:disabled), :root a.hero-action:active, :root a.btn-hero:active { transform: scale(0.95); }
+:root button:active:not(:disabled), :root a.hero-action:active, :root a.btn-hero:active { transform: scale(0.98); }
 .skill-chip { display: inline-flex; transition: transform 0.25s var(--motion-ease), opacity 0.25s; }
 .service-icon { position: relative; isolation: isolate; }
 .service-icon::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--motion-gradient); opacity: 0; transition: opacity 0.25s; z-index: -1; }
@@ -54,7 +54,7 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 .timeline-track, .timeline-progress { position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: hsl(var(--primary) / 0.15); }
 .timeline-progress { background: var(--motion-gradient); transform-origin: top; }
 .timeline-dot { background: var(--motion-gradient); box-shadow: 0 0 0 4px hsl(var(--secondary) / 0.1); }
-.timeline-dot::after { content: ""; position: absolute; inset: -6px; border: 1px solid hsl(var(--motion-teal) / 0.4); border-radius: 50%; animation: dot-pulse 3.6s ease-out infinite; }
+.timeline-dot::after { content: ""; position: absolute; inset: -4px; border: 1px solid hsl(var(--motion-teal) / 0.2); border-radius: 50%; }
 @keyframes dot-pulse { 0%, 70% { transform: scale(1); opacity: 0; } 75% { opacity: 0.5; } 100% { transform: scale(1.8); opacity: 0; } }
 .date-badge { font-variant-numeric: tabular-nums; }
 @keyframes icon-once { 50% { transform: translateY(-5px); } }
@@ -64,9 +64,9 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 .contact-map-frame iframe { display: block; width: 100%; height: 100%; min-height: 320px; transition: transform 0.35s var(--motion-ease); }
 .contact-form-card { margin-top: 0 !important; }
 .contact-row { transition: transform 0.25s var(--motion-ease); }
-.contact-icon svg { animation: contact-pulse 4.8s ease-in-out infinite; }
+.contact-icon svg { animation: none; }
 @keyframes contact-pulse { 50% { opacity: 0.7; } }
-.chat-float { animation: chat-float 5s ease-in-out infinite; }
+.chat-float { animation: none; }
 @keyframes chat-float { 50% { transform: translateY(-4px); } }
 .form-field { position: relative; }
 .field-label { transition: transform 0.25s var(--motion-ease); transform-origin: left; }
@@ -87,7 +87,7 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 .footer-link { position: relative; display: inline-flex; }
 .footer-link::after { content: ""; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.25s var(--motion-ease); }
 .footer-link:hover::after, .footer-link:focus-visible::after { transform: scaleX(1); }
-.footer-heart { animation: heart-beat 3.8s ease-in-out infinite; }
+.footer-heart { animation: none; }
 @keyframes heart-beat { 0%, 35%, 65%, 100% { transform: scale(1); } 45%, 55% { transform: scale(1.12); } }
 .back-to-top { position: fixed; bottom: 20px; right: 20px; z-index: 45; width: 52px; height: 52px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; background: hsl(var(--card)); color: hsl(var(--motion-teal)); box-shadow: var(--shadow-card); }
 .scroll-percent { font-size: 9px; line-height: 1; font-variant-numeric: tabular-nums; }
@@ -106,14 +106,14 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
   .tilt-card:hover::after, .tilt-card:focus-within::after { opacity: 1; }
   .shimmer-button:hover::after { opacity: 1; transform: translateX(45%); transition: transform 0.65s var(--motion-ease), opacity 0.2s; }
   .shimmer-button:hover svg { animation: icon-once 0.55s var(--motion-ease); }
-  .skill-chip:hover { transform: scale(1.08) rotate(-2deg); background: hsl(var(--motion-teal) / 0.12); color: hsl(var(--motion-teal)); animation: chip-wiggle 0.35s var(--motion-ease); }
+  .skill-chip:hover { background: hsl(var(--motion-teal) / 0.12); color: hsl(var(--motion-teal)); }
   @keyframes chip-wiggle { 30% { transform: scale(1.08) rotate(2deg); } 70% { transform: scale(1.08) rotate(-2deg); } }
   .service-card:hover .service-icon::before { opacity: 1; }
-  .service-card:hover .service-icon svg { transform: rotate(-8deg) scale(1.12); color: white; }
+  .service-card:hover .service-icon svg { color: white; }
   .service-card:hover::before { transform: scaleX(1); }
   .service-card:hover h3 { color: hsl(var(--motion-teal)); }
   .workflow-step:hover { border-color: hsl(var(--motion-teal) / 0.3); background: hsl(var(--secondary) / 0.12); }
-  .workflow-step:hover svg { animation: arrow-step 1.3s var(--motion-ease) infinite; }
+  .workflow-step:hover svg { transform: translateX(2px); }
   @keyframes arrow-step { 50% { transform: translateX(3px); } }
   .role-card:hover > svg { animation: role-pulse 0.55s var(--motion-ease); }
   @keyframes role-pulse { 50% { transform: scale(1.12) rotate(3deg); } }
@@ -122,7 +122,7 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
   .project-card:hover .project-detail-hint, .project-card:focus-within .project-detail-hint { opacity: 1; transform: translateX(0); }
   .certificate-card:hover .certificate-icon { transform: rotate(8deg); }
   .certificate-icon { transition: transform 0.25s var(--motion-ease); }
-  .contact-row:hover { transform: translateX(6px); }
+  .contact-row:hover { transform: translateX(2px); }
   .contact-row:hover .contact-icon { background: hsl(var(--secondary) / 0.2); }
   .contact-map-frame:hover iframe { transform: scale(1.015); }
   .external-cta:hover svg { transform: translate(2px, -2px); }

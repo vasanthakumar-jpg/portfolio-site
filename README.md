@@ -50,9 +50,11 @@ npm install --no-save --package-lock=false playwright
 npx playwright install chromium
 ```
 
-Run `npm run build`, then keep `npm run preview` running in one terminal. Run `npm run test:browser` for the portfolio regression checks, or `npm run test:preloader` for first-visit timing, resource readiness, session reloads, responsive sizes, reduced motion, and the five-second safety deadline. Run these browser suites separately so their timing checks do not compete for browser resources. Screenshots, diagnostics, and JSON reports go only to ignored `audit-artifacts/`. Gmail navigation is intercepted locally; tests send no email. A configured mail app and signed-in Gmail account still require manual checks. Run `npm ci` later to restore the exact committed dependencies.
+Run `npm run build`, then keep `npm run preview` running in one terminal. Run `npm run test:browser` for the portfolio regression checks, or `npm run test:preloader` for loader timing on every page refresh, resource readiness, responsive sizes, reduced motion, and the five-second safety deadline. The loader replays on every full page load, while hash links and client-side navigation keep the page ready. Run these browser suites separately so their timing checks do not compete for browser resources. Screenshots, diagnostics, and JSON reports go only to ignored `audit-artifacts/`. Gmail navigation is intercepted locally; tests send no email. A configured mail app and signed-in Gmail account still require manual checks. Run `npm ci` later to restore the exact committed dependencies.
 
 ## GitHub Pages deployment
+
+Cinematic motion controls, section changes, accessibility behavior and the `npm run test:motion` regression suite are documented in [Motion.md](Motion.md).
 
 The workflow in [.github/workflows/deploy.yml](.github/workflows/deploy.yml) installs with `npm ci`, lints, typechecks, tests, builds, uploads `dist/`, and deploys that artifact when changes reach `main`.
 

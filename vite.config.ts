@@ -10,6 +10,17 @@ export default defineConfig(({ command, isPreview }) => ({
     },
   },
   base: command === "build" || isPreview ? "/portfolio-site/" : "/", // GitHub Pages base path
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom"],
+          "scroll-motion": ["gsap", "gsap/ScrollTrigger", "lenis"],
+          "ui-motion": ["framer-motion"],
+        },
+      },
+    },
+  },
   server: {
     host: "::",
     port: 8080,

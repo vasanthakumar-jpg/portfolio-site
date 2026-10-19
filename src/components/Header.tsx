@@ -6,6 +6,7 @@ import SocialIcons from "./SocialIcons";
 import { profile } from "@/data/portfolio";
 import { useAnimationPreferences } from "./motion/preferences";
 import { motionEase } from "./motion/variants";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -74,7 +75,7 @@ const Header = () => {
           <img src={import.meta.env.BASE_URL + "logo.png"} alt="Vasanthakumar portfolio" width={748} height={323}
             className="w-32 md:w-36 lg:w-48 object-contain" />
         </a>
-        <nav aria-label="Main navigation" className="hidden md:flex items-center space-x-3 lg:space-x-5">
+        <nav aria-label="Main navigation" className="hidden md:flex items-center space-x-2 lg:space-x-3">
           {navItems.map(item => <a href={item.href} key={item.label} onClick={() => { setActive(item.href); setHidden(false); }}
             aria-current={active === item.href ? "location" : undefined} className="nav-link font-medium text-sm lg:text-base px-2 py-2">
             {active === item.href && <motion.span aria-hidden="true" layoutId={reducedMotion ? undefined : "nav-active"}
@@ -82,6 +83,7 @@ const Header = () => {
             <span className="relative">{item.label}</span>
           </a>)}
           <div className="hidden xl:flex"><SocialIcons iconSize={16} className="mx-2" showAll /></div>
+          <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className="social-icon social-whatsapp xl:hidden"><WhatsAppIcon aria-hidden="true" size={18} /></a>
           <Button asChild className="btn-hero shimmer-button text-sm px-4 py-2 lg:px-5">{resume}</Button>
         </nav>
         <button type="button" ref={menuButtonRef} className="md:hidden p-2 rounded-lg hover:bg-muted"

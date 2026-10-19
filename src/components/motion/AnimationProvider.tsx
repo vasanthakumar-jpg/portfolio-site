@@ -5,12 +5,12 @@ import { AnimationContext } from "./preferences";
 export function AnimationProvider({ children }: { children: ReactNode }) {
   const [preferences, setPreferences] = useState(() => ({
     reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    finePointer: window.matchMedia("(hover: hover) and (pointer: fine)").matches,
+    finePointer: window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)").matches,
   }));
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const pointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const pointer = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
     const update = () => setPreferences({ reducedMotion: reduced.matches, finePointer: pointer.matches });
     reduced.addEventListener("change", update);
     pointer.addEventListener("change", update);

@@ -5,8 +5,8 @@ import { PageLoadingContext, type LoadingPhase } from "./loading-context";
 
 export function PageLoadingProvider({ children }: { children: ReactNode }) {
   const { reducedMotion } = useAnimationPreferences();
-  const { enabled, ready } = usePageReady(reducedMotion);
-  const [phase, setPhase] = useState<LoadingPhase>(() => enabled ? reducedMotion ? "exiting" : "loading" : "ready");
+  const { ready } = usePageReady(reducedMotion);
+  const [phase, setPhase] = useState<LoadingPhase>(() => reducedMotion ? "exiting" : "loading");
   const finishLoading = useCallback(() => setPhase("ready"), []);
 
   useEffect(() => { if (ready) setPhase(previous => previous === "loading" ? "exiting" : previous); }, [ready]);
@@ -16,10 +16,9 @@ export function PageLoadingProvider({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(timer);
   }, [phase, reducedMotion, finishLoading]);
   useEffect(() => {
-    if (!enabled) return;
     const timer = window.setTimeout(finishLoading, MAXIMUM_LOADING_MS);
     return () => window.clearTimeout(timer);
-  }, [enabled, finishLoading]);
+  }, [finishLoading]);
 
   const value = useMemo(() => ({ phase, heroReady: reducedMotion || phase === "ready", finishLoading }), [phase, reducedMotion, finishLoading]);
   return <PageLoadingContext.Provider value={value}>{children}</PageLoadingContext.Provider>;

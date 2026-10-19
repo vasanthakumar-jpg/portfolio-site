@@ -329,7 +329,7 @@ try {
     assert.equal(metadata.canonical, "https://vasanthakumar-jpg.github.io/portfolio-site/");
     const image = new URL(metadata.image);
     assert.equal(image.origin, "https://vasanthakumar-jpg.github.io");
-    assert.ok(image.pathname.startsWith("/portfolio-site/assets/"));
+    assert.equal(image.pathname, "/portfolio-site/images/vasanthakumar-profile.jpg");
     const imageResponse = await page.request.get(new URL(image.pathname, siteUrl.origin).href);
     assert.ok(imageResponse.ok());
     assert.match(imageResponse.headers()["content-type"], /^image\//);

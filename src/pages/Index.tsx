@@ -9,10 +9,13 @@ import SEOHead from '@/components/SEOHead';
 import ServicesSection from '@/components/ServicesSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import PortfolioEffects from '@/components/motion/PortfolioEffects';
+import { SmoothScroll } from '@/components/motion/SmoothScroll';
+import CinematicScenes from '@/components/motion/CinematicScenes';
 
 const Index = () => {
   return (
-    <>
+    <SmoothScroll>
+      <CinematicScenes />
       <SEOHead />
       <PortfolioEffects />
       <a href="#main-content" className="skip-link">Skip to content</a>
@@ -27,7 +30,7 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </SmoothScroll>
   );
 };
 

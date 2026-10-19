@@ -8,6 +8,7 @@ export const profile = {
   github: "https://github.com/vasanthakumar-jpg",
   linkedin: "https://www.linkedin.com/in/vasanthakumar-rajendran-83993422b/",
   siteUrl: "https://vasanthakumar-jpg.github.io/portfolio-site/",
+  whatsapp: "https://wa.me/917339232817",
   resumePath: "Vasanthakumar_Resume.pdf",
   summary: "I build responsive React interfaces and customize Shopify storefronts with Liquid, HTML, CSS, and JavaScript. My work spans reusable UI, REST API integration, testing, technical SEO, and everyday e-commerce workflows.",
   current: "Currently, I’m a Web Developer & E-commerce Executive at Walrus – Yes India Can. I’m also the Founder & Owner of PRAVOKHA, a multi-vendor e-commerce platform that I developed and managed.",
@@ -24,6 +25,7 @@ export const capabilities = [
   { title: "Shopify & E-commerce", description: "Liquid theme customization, product and collection management, and checkout, payment, and shipping workflows." },
   { title: "UI Development", description: "Wireframes translated into accessible, mobile-first interfaces using Tailwind CSS, Material UI, and responsive layouts." },
   { title: "Testing / Optimization / SEO", description: "Unit testing, cross-browser checks, rendering and load-time optimization, technical SEO, and Google Search Console." },
+  { title: "Budget-Friendly Development", description: "Professional websites and e-commerce solutions built with practical scope, clean development and cost-conscious implementation." },
 ];
 export const experiences = [
   { company: "Walrus – Yes India Can", role: "Web Developer & E-commerce Executive", period: "06/2026 – Present", location: "Tirupur, Tamil Nadu · On-site", bullets: [

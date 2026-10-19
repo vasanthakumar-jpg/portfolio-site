@@ -56,12 +56,22 @@ for(const width of [320,375,390,430,768,1024,1440,1920]){
     await context.close();
   });
 }
-await check('subsequent session reloads and client-side route changes skip the loader',async()=>{
-  const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
+for(const width of [390,1440]) await check(`every refresh replays the loader despite old session flags; in-page navigation stays ready ${width}px`,async()=>{
+  const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'no-preference',hasTouch:width<768});
   const page=await context.newPage();watch(page);await page.goto(base,{waitUntil:'domcontentloaded'});await page.locator('.logo-preloader').waitFor({state:'detached',timeout:5500});
-  assert.equal(await page.evaluate(()=>sessionStorage.getItem('portfolio:logo-preloader:v1')),'1');
-  await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('.logo-preloader').count(),0);
-  assert.equal(await page.locator('#home').getAttribute('data-hero-ready'),'true');
+  await page.evaluate(()=>sessionStorage.setItem('portfolio:logo-preloader:v1','1'));
+  for(let refresh=0;refresh<2;refresh++){
+    await page.reload({waitUntil:'domcontentloaded'});
+    await page.locator('.logo-preloader').waitFor({state:'visible'});
+    assert.equal(await page.locator('.logo-preloader').getAttribute('data-phase'),'loading');
+    assert.equal(await page.locator('#home').getAttribute('data-hero-ready'),'false');
+    await page.locator('.logo-preloader').waitFor({state:'detached',timeout:5500});
+    assert.equal(await page.locator('#home').getAttribute('data-hero-ready'),'true');
+    assert.equal(await page.evaluate(()=>document.body.style.overflow),'');
+  }
+  const budget=page.locator('#services').getByRole('heading',{name:'Budget-Friendly Development',exact:true});
+  assert.equal(await budget.count(),1);
+  assert.ok((await budget.locator('..').textContent()).includes('Professional websites and e-commerce solutions built with practical scope, clean development and cost-conscious implementation.'));
   await page.evaluate(()=>{history.pushState({},'','/portfolio-site/not-a-real-route');dispatchEvent(new PopStateEvent('popstate'));});
   await page.getByRole('heading',{name:'404'}).waitFor();assert.equal(await page.locator('.logo-preloader').count(),0);
   await page.getByRole('link',{name:'Return to Home'}).click();assert.equal(await page.locator('.logo-preloader').count(),0);
@@ -108,11 +118,17 @@ await check('reduced motion uses only a short fade and never locks scrolling or 
   await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.tagName),'A');
   await page.locator('.logo-preloader').waitFor({state:'detached',timeout:1200});const timing=await page.evaluate(()=>window.__loader);
   assert.ok(timing.hidden-timing.shown<=700,JSON.stringify(timing));assert.ok(timing.overflow.every(v=>v!=='hidden'));
-  await page.reload({waitUntil:'domcontentloaded'});assert.equal(await page.locator('.logo-preloader').count(),0);await context.close();
+  await page.reload({waitUntil:'domcontentloaded'});
+  await page.locator('.logo-preloader').waitFor({state:'attached'});
+  assert.equal(await page.evaluate(()=>document.body.style.overflow),'');
+  await page.locator('.logo-preloader').waitFor({state:'detached',timeout:1200});
+  assert.ok((await page.evaluate(()=>window.__loader)).overflow.every(v=>v!=='hidden'));
+  await context.close();
 });
 await check('production preload and theme metadata use the GitHub Pages base',async()=>{
   const context=await browser.newContext({reducedMotion:'reduce'});const page=await context.newPage();watch(page);await page.goto(base);
-  assert.equal(await page.locator('link[rel="preload"][as="image"]').getAttribute('href'),'/portfolio-site/logo.png');
+  assert.equal(await page.locator('link[rel="preload"][as="image"][href$="/logo.png"]').getAttribute('href'),'/portfolio-site/logo.png');
+  assert.equal(await page.locator('link[rel="preload"][as="image"][href$="/vasanthakumar-profile.jpg"]').getAttribute('href'),'/portfolio-site/images/vasanthakumar-profile.jpg');
   assert.equal(await page.locator('header img').getAttribute('src'),'/portfolio-site/logo.png');
   assert.equal(await page.locator('meta[name="theme-color"]').getAttribute('content'),'#1a6b5a');
   const response=await page.request.get(base+'logo.png');assert.equal(response.status(),200);assert.match(response.headers()['content-type'],/image\/png/);

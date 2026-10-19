@@ -3,8 +3,10 @@ import { ArrowRight, ExternalLink, ShieldCheck, Store, ShoppingBag, Users, Check
 import { Button } from "@/components/ui/button";
 import { marketplace, professionalWork, projects } from "@/data/portfolio";
 import { MagneticButton, Reveal, SectionHeading, StaggerContainer, StaggerItem, TiltCard } from "./motion/primitives";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useAnimationPreferences } from "./motion/preferences";
+import { ModalExpand } from "./motion/ModalExpand";
+import { PinnedSection } from "./motion/cinematic";
 
 const roleIcons = [ShieldCheck, Users, Store, ShoppingBag];
 
@@ -18,7 +20,7 @@ const ProjectsSection = () => {
         <Reveal as="p" className="text-responsive-lg text-muted-foreground">Marketplace development, Shopify storefronts, and responsive front-end interfaces.</Reveal>
       </div>
 
-      <TiltCard as="article" id="pravokha" scale={0.98} maxTilt={0} lift={4} hoverScale={1.005} className="card-portfolio border border-primary/30 mb-10 overflow-hidden min-w-0">
+      <div className="pravokha-scene"><TiltCard as="article" id="pravokha" scale={0.98} maxTilt={0} lift={4} hoverScale={1.005} className="card-portfolio border border-primary/30 mb-10 overflow-hidden min-w-0">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <div className="min-w-0">
             <p className="text-primary text-sm font-semibold mb-3">Featured case study · {marketplace.role}</p>
@@ -33,7 +35,7 @@ const ProjectsSection = () => {
           </div>
           <div className="rounded-xl bg-primary/5 p-4 sm:p-6 border border-primary/20 min-w-0">
             <h4 className="font-semibold mb-4">Four roles. Separate dashboards.</h4>
-            <ul className="grid grid-cols-2 gap-3">
+            <ul className="role-stack grid grid-cols-2 gap-3">
               {marketplace.roles.map((role, index) => {
                 const Icon = roleIcons[index];
                 return <TiltCard as="li" key={role} delay={index * 0.1} maxTilt={3} lift={4} className="role-card bg-card rounded-xl p-3 sm:p-4 border shadow-soft min-w-0"><Icon aria-hidden="true" className="w-6 h-6 text-primary mb-3" /><p className="font-semibold text-sm sm:text-base">{role}</p><p className="text-xs text-muted-foreground mt-1">Role-based dashboard</p></TiltCard>;
@@ -45,15 +47,16 @@ const ProjectsSection = () => {
         <div className="border-t border-border pt-6 mt-8">
           <h4 className="font-semibold mb-4">Customer shopping workflow</h4>
           <div className="workflow-list">
-            <motion.span aria-hidden="true" className="workflow-connector" initial={reducedMotion ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reducedMotion ? 0 : 0.8 }} />
+            <span aria-hidden="true" className="workflow-connector" />
+            <span aria-hidden="true" className="workflow-traveler" />
             <StaggerContainer as="ol" className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {marketplace.workflow.map((step, index) => <StaggerItem key={step} className="workflow-step rounded-lg bg-muted p-3 flex items-center justify-between gap-2 text-sm font-medium"><span>{step}</span>{index < marketplace.workflow.length - 1 && <ArrowRight aria-hidden="true" className="w-4 h-4 text-primary shrink-0" />}</StaggerItem>)}
+              {marketplace.workflow.map((step, index) => <StaggerItem key={step} className="workflow-step rounded-lg bg-muted p-3 flex items-center justify-between gap-2 text-sm font-medium"><span aria-hidden="true" className="workflow-light" /><span>{step}</span>{index < marketplace.workflow.length - 1 && <ArrowRight aria-hidden="true" className="w-4 h-4 text-primary shrink-0" />}</StaggerItem>)}
             </StaggerContainer>
           </div>
         </div>
-      </TiltCard>
+      </TiltCard></div>
 
-      <Reveal as="article" id="walrus" direction="left" className="card-portfolio border border-secondary/40 mb-14 min-w-0">
+      <Reveal as="article" id="walrus" direction="right" className="card-portfolio border border-secondary/40 mb-14 min-w-0 draw-checks">
         <p className="text-secondary text-sm font-semibold mb-3">Featured professional work · Shopify & E-commerce</p>
         <h3 className="text-2xl sm:text-3xl font-bold mb-3">{professionalWork.title}</h3>
         <p className="font-semibold mb-3">{professionalWork.role}</p>
@@ -64,27 +67,33 @@ const ProjectsSection = () => {
         </div>
       </Reveal>
 
+      <PinnedSection scene="gallery" className="gallery-scene">
       <SectionHeading as="h3" className="mb-8">More Front-End Work</SectionHeading>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {projects.map((project, index) => <TiltCard as="article" key={project.title} delay={(index % 3) * 0.1} lift={10} hoverScale={1.03} maxTilt={2} className="project-card card-portfolio border min-w-0 flex flex-col">
+      <div className="gallery-status" aria-hidden="true"><span><span className="gallery-counter-current">01</span> / {String(projects.length).padStart(2, "0")}</span><span className="gallery-progress"><span className="gallery-progress-fill" /></span></div>
+      <div className="gallery-viewport"><div className="gallery-track grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {projects.map((project, index) => <div className="gallery-card-scene" key={project.title}><TiltCard as="article" layoutId={reducedMotion ? undefined : `project-${index}`} delay={(index % 3) * 0.1} lift={10} hoverScale={1.03} maxTilt={2} data-cursor-label="View"
+          onClick={event => {
+            const target = event.target;
+            if (target instanceof Element && event.currentTarget.contains(target) && !target.closest("a,button")) {
+              event.currentTarget.querySelector<HTMLButtonElement>(".project-detail-hint")?.click();
+            }
+          }} className="project-card card-portfolio border min-w-0 flex flex-col h-full cursor-pointer">
           <p className="project-top-label text-sm text-primary font-medium mb-3">{project.type}</p>
           <h4 className="text-xl font-bold mb-3">{project.title}</h4>
           <p className="text-sm font-semibold mb-4">{project.role}</p>
           <p className="text-muted-foreground text-sm leading-relaxed mb-4">{project.description}</p>
-          {project.technologies.length > 0 ? <ul className="flex flex-wrap gap-2 mb-5" aria-label={`${project.title} technologies`}>{project.technologies.map((technology) => <li key={technology} className="skill-chip rounded-full bg-primary/10 px-2.5 py-1 text-xs">{technology}</li>)}</ul> : <p className="text-xs text-muted-foreground mb-5">Technology stack not specified.</p>}
+          {project.technologies.length > 0 && <ul className="flex flex-wrap gap-2 mb-5" aria-label={`${project.title} technologies`}>{project.technologies.map((technology) => <li key={technology} className="skill-chip rounded-full bg-primary/10 px-2.5 py-1 text-xs">{technology}</li>)}</ul>}
           <StaggerContainer as="ul" className="space-y-2">{project.features.map(feature => <StaggerItem key={feature} className="text-sm text-muted-foreground flex gap-2"><Check aria-hidden="true" className="w-4 h-4 shrink-0 text-primary mt-0.5" /><span>{feature}</span></StaggerItem>)}</StaggerContainer>
-          <Dialog>
-            <DialogTrigger asChild><button type="button" className="project-detail-hint self-start" aria-label={`View details for ${project.title}`}>View details<ArrowRight aria-hidden="true" /></button></DialogTrigger>
-            <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto w-[calc(100%-2rem)] rounded-xl">
+          <ModalExpand id={`project-${index}`} trigger={<button type="button" className="project-detail-hint self-start" aria-label={`View details for ${project.title}`}>View details<ArrowRight aria-hidden="true" /></button>}>
               <DialogTitle>{project.title}</DialogTitle>
               <DialogDescription>{project.description}</DialogDescription>
               <p className="text-sm font-semibold">{project.type} · {project.role}</p>
               {project.technologies.length > 0 && <p className="text-sm text-muted-foreground">{project.technologies.join(" · ")}</p>}
               <ul className="space-y-2">{project.features.map(feature => <li key={feature} className="flex gap-2 text-sm"><Check aria-hidden="true" className="h-4 w-4 shrink-0 text-secondary" />{feature}</li>)}</ul>
-            </DialogContent>
-          </Dialog>
-        </TiltCard>)}
-      </div>
+          </ModalExpand>
+        </TiltCard></div>)}
+      </div></div>
+      </PinnedSection>
     </div>
   </section>
 );

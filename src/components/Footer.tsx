@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-background relative">
-      <div className="container-custom py-12">
+      <div className="footer-uncover container-custom py-12">
         <Reveal className="text-center">
           <h3 className="text-2xl font-bold text-gradient mb-4">{profile.name}</h3>
           <p className="text-background/70 mb-6 max-w-md mx-auto">

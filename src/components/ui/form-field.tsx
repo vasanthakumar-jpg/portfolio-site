@@ -48,7 +48,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
     const { reducedMotion } = useAnimationPreferences();
     
     return (
-      <div className={`form-field space-y-2 ${className}`}>
+      <div className={`form-field space-y-2 ${className}`} data-filled={!!value}>
         <Label 
           htmlFor={fieldId} 
           className="field-label block text-sm font-medium text-foreground"

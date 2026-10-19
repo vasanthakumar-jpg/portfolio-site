@@ -12,7 +12,7 @@ interface SEOHeadProps {
 const SEOHead = ({ 
   title = "Vasanthakumar Rajendran | React & Shopify Developer",
   description = "Front-End Developer building React interfaces and Shopify storefronts with Liquid, responsive UI, API integration, testing, and technical SEO.",
-  image = profile.siteUrl + "assets/profile-hero.jpg",
+  image = profile.siteUrl + "images/vasanthakumar-profile.jpg",
   url = profile.siteUrl,
   type = "profile"
 }: SEOHeadProps) => {

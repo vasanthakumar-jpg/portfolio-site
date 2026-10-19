@@ -2,6 +2,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { profile } from "@/data/portfolio";
 import { useAnimationPreferences } from "./motion/preferences";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 interface SocialIconsProps {
   className?: string;
@@ -38,6 +39,7 @@ const SocialIcons = ({
       icon: Mail,
       className: "social-mail",
     },
+    { name: "WhatsApp", href: profile.whatsapp, icon: WhatsAppIcon, className: "social-whatsapp" },
   ];
 
   const limitedSocialLinks = [
@@ -56,19 +58,17 @@ const SocialIcons = ({
           href={social.href}
           target={social.href.startsWith("https://") ? "_blank" : undefined}
           rel={social.href.startsWith("https://") ? "noopener noreferrer" : undefined}
-          initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{
-            delay: reducedMotion ? 0 : delay + index * 0.1,
-            type: "spring",
-            stiffness: 200,
-            damping: 15,
+            delay: reducedMotion ? 0 : delay + index * 0.06,
+            duration: reducedMotion ? 0 : 0.45,
           }}
           className={`social-icon ${social.className}`}
-          aria-label={social.name === "Email" ? "Email Vasanthakumar" : `Visit ${social.name} profile`}
-          whileHover={finePointer && !reducedMotion ? { y: -3, rotate: 8, scale: 1.06 } : undefined}
-          whileTap={reducedMotion ? undefined : { scale: 0.95 }}
+          aria-label={social.name === "WhatsApp" ? "Chat on WhatsApp" : social.name === "Email" ? "Email Vasanthakumar" : `Visit ${social.name} profile`}
+          whileHover={finePointer && !reducedMotion ? { y: -1 } : undefined}
+          whileTap={reducedMotion ? undefined : { scale: 0.98 }}
         >
           <social.icon aria-hidden="true" size={iconSize} />
           {showLabels && (

@@ -6,10 +6,13 @@ import {
   Mail,
   MessageCircle,
   User,
+  Github,
+  Linkedin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FormField from "@/components/ui/form-field";
 import { profile } from "@/data/portfolio";
+import WhatsAppIcon from "./WhatsAppIcon";
 import { toast } from "sonner";
 import { Reveal, SectionHeading, TiltCard } from "./motion/primitives";
 import {
@@ -150,6 +153,9 @@ const ContactSection = () => {
       subtitle: "Best way to reach me",
       color: "text-accent",
     },
+    { icon: Linkedin, title: "LinkedIn", details: profile.name, href: profile.linkedin, subtitle: "Professional profile", color: "text-primary" },
+    { icon: Github, title: "GitHub", details: "vasanthakumar-jpg", href: profile.github, subtitle: "Projects and source code", color: "text-primary" },
+    { icon: WhatsAppIcon, title: "WhatsApp", details: "Chat on WhatsApp", href: profile.whatsapp, subtitle: "Start a conversation", color: "text-primary" },
   ];
 
   return (
@@ -174,14 +180,14 @@ const ContactSection = () => {
                 Contact Information
               </h3>
 
-              <div className="space-y-6">
+              <div className="contact-methods grid sm:grid-cols-2 gap-4">
                 {contactInfo.map((info, index) => (
                   <Reveal
                     key={index}
                     delay={index * 0.1}
                     className="group"
                   >
-                    <div className="contact-row flex items-start space-x-4 p-4 rounded-xl">
+                    <div className="contact-row flex items-start space-x-3 p-4 rounded-xl h-full">
                       <div
                         className="contact-icon w-10 h-10 sm:w-12 sm:h-12 bg-slate-200 rounded-lg flex items-center justify-center flex-shrink-0 shadow-soft"
                       >
@@ -195,7 +201,9 @@ const ContactSection = () => {
                         </h4>
                         <p className="text-foreground font-medium text-responsive-sm break-words">
                           {info.href ? (
-                            <a href={info.href} className="hover:underline">{info.details}</a>
+                            <a href={info.href} target={info.href.startsWith("https:") ? "_blank" : undefined}
+                              rel={info.href.startsWith("https:") ? "noopener noreferrer" : undefined}
+                              aria-label={info.title === "WhatsApp" ? "Chat on WhatsApp" : undefined} className="contact-method-link hover:underline">{info.title === "Email" ? <>{CONTACT_EMAIL.split("@")[0]}<wbr />@{CONTACT_EMAIL.split("@")[1]}</> : info.details}</a>
                           ) : info.details}
                         </p>
                         <p className="text-muted-foreground text-responsive-xs">
