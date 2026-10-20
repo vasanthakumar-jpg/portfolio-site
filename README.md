@@ -17,7 +17,9 @@ npm ci
 npm run dev
 ```
 
-Development runs at http://localhost:8080/. On Windows PowerShell, use `npm.cmd` if the PowerShell npm wrapper is restricted.
+Development runs at http://127.0.0.1:5173/. Vite binds to IPv4 explicitly and requires this port, avoiding an IPv4/IPv6 split with Docker/nginx on port 8080. If port 5173 is occupied, Vite reports an error instead of silently moving to a different port. On Windows PowerShell, use `npm.cmd` if the PowerShell npm wrapper is restricted.
+
+If an old tab at `localhost:8080` shows nginx's **502 Bad Gateway**, open the development URL above. That port can belong to another local service. Start the portfolio with `npm run dev` and use the address printed by Vite.
 
 ```sh
 npm run lint

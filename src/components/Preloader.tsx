@@ -65,7 +65,7 @@ export default function Preloader() {
       <motion.div className="preloader-logo-float" animate={reducedMotion || exiting ? { y: 0 } : { y: [0, -3, 0] }}
         transition={reducedMotion || exiting ? { duration: 0 } : { duration: 1.2, delay: 1, repeat: Infinity, ease: "easeInOut" }}>
         <motion.img src={import.meta.env.BASE_URL + "logo.png"} alt="Vasanthakumar — Frontend Developer" width={748} height={323}
-          fetchPriority="high" decoding="async" className="preloader-logo" initial={reducedMotion ? false : { opacity: 0, scale: 0.94 }}
+          {...{ fetchpriority: "high" }} decoding="async" className="preloader-logo" initial={reducedMotion ? false : { opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }} transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.3, ease: motionEase }} />
       </motion.div>
       </motion.div>

@@ -50,9 +50,11 @@ html.lenis { scroll-behavior: auto !important; }
 .service-card:hover h3::after { transform: scaleX(1); }
 .role-stack { perspective: 900px; }
 .role-stack .role-card { box-shadow: var(--shadow-soft); }
-.workflow-traveler { position: absolute; top: calc(50% - 4px); left: 0; height: 8px; width: 8px; background: var(--cinema-teal); border-radius: 50%; box-shadow: 0 0 14px #1a6b5a44; }
-.workflow-step .workflow-light { position: absolute; inset: 0; background: #1a6b5a13; border: 1px solid #1a6b5a45; border-radius: inherit; pointer-events: none; }
-.workflow-step > span:not(.workflow-light), .workflow-step > svg { position: relative; }
+.workflow-traveler { position: absolute; top: 24px; left: 14px; height: 8px; width: 8px; background: var(--cinema-teal); border-radius: 50%; box-shadow: 0 0 10px #1a6b5a33; pointer-events: none; }
+.workflow-card .workflow-light { position: absolute; inset: -1px; background: #1a6b5a08; border: 1px solid #1a6b5a40; border-radius: inherit; pointer-events: none; }
+@media (min-width: 768px) {
+  .workflow-traveler { top: 14px; left: calc(var(--workflow-inset) - 4px); }
+}
 .gallery-scene { position: relative; min-width: 0; }
 .gallery-viewport { overflow: clip; padding: 14px 10px 24px; margin-inline: -10px; }
 .gallery-status { display: none; justify-content: space-between; align-items: center; gap: 20px; font-family: ui-monospace, monospace; font-size: .8rem; margin-bottom: 1.25rem; color: var(--cinema-teal); }

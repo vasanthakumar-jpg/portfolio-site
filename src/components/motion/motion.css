@@ -44,9 +44,22 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
 .service-icon::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--motion-gradient); opacity: 0; transition: opacity 0.25s; z-index: -1; }
 .service-icon svg { transition: transform 0.3s var(--motion-ease); }
 .service-card::before { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--motion-gradient); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--motion-ease); }
-.workflow-list { position: relative; }
-.workflow-connector { position: absolute; height: 2px; left: 0; right: 0; top: 50%; background: var(--motion-gradient); transform-origin: left; }
-.workflow-step { position: relative; border: 1px solid transparent; }
+.workflow-list { position: relative; isolation: isolate; }
+.workflow-steps { display: grid; gap: 1rem; }
+.workflow-track, .workflow-connector { position: absolute; width: 2px; left: 17px; top: 28px; bottom: 28px; transform-origin: top; pointer-events: none; }
+.workflow-track { background: hsl(var(--border)); }
+.workflow-connector { background: var(--motion-gradient); }
+.workflow-step { position: relative; display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.workflow-marker { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; flex: 0 0 36px; width: 36px; height: 36px; border: 1px solid hsl(var(--primary) / 0.3); border-radius: 50%; background: hsl(var(--card)); color: hsl(var(--primary)); font-size: .75rem; font-weight: 650; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 5px hsl(var(--card)); }
+.workflow-card { position: relative; display: flex; align-items: center; flex: 1; min-width: 0; min-height: 56px; padding: .875rem 1rem; border: 1px solid hsl(var(--border)); border-radius: 12px; background: hsl(var(--muted) / .5); }
+.workflow-label { position: relative; font-size: .875rem; font-weight: 500; line-height: 1.5; color: hsl(var(--foreground)); }
+@media (min-width: 768px) {
+  .workflow-list { --workflow-inset: calc(12.5% - .375rem); }
+  .workflow-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .workflow-track, .workflow-connector { left: var(--workflow-inset); right: var(--workflow-inset); top: 17px; bottom: auto; width: auto; height: 2px; transform-origin: left; }
+  .workflow-step { flex-direction: column; gap: .875rem; }
+  .workflow-card { flex: 1 1 auto; width: 100%; justify-content: center; text-align: center; }
+}
 .project-card::before { content: ""; pointer-events: none; position: absolute; inset: 0; background: linear-gradient(145deg, transparent 30%, hsl(var(--secondary) / 0.09)); opacity: 0; transition: opacity 0.3s; }
 .project-detail-hint { display: flex; align-items: center; gap: 0.4rem; min-height: 44px; margin-top: 1rem; font-size: 0.75rem; color: hsl(var(--motion-teal)); opacity: 0; transform: translateX(-6px); transition: transform 0.25s var(--motion-ease), opacity 0.25s; }
 .project-detail-hint svg { width: 14px; height: 14px; }
@@ -112,9 +125,6 @@ html { scrollbar-color: hsl(var(--motion-teal)) hsl(var(--muted)); scrollbar-wid
   .service-card:hover .service-icon svg { color: white; }
   .service-card:hover::before { transform: scaleX(1); }
   .service-card:hover h3 { color: hsl(var(--motion-teal)); }
-  .workflow-step:hover { border-color: hsl(var(--motion-teal) / 0.3); background: hsl(var(--secondary) / 0.12); }
-  .workflow-step:hover svg { transform: translateX(2px); }
-  @keyframes arrow-step { 50% { transform: translateX(3px); } }
   .role-card:hover > svg { animation: role-pulse 0.55s var(--motion-ease); }
   @keyframes role-pulse { 50% { transform: scale(1.12) rotate(3deg); } }
   .project-card:hover::before { opacity: 1; }

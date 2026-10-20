@@ -330,7 +330,9 @@ try {
     const image = new URL(metadata.image);
     assert.equal(image.origin, "https://vasanthakumar-jpg.github.io");
     assert.equal(image.pathname, "/portfolio-site/images/vasanthakumar-profile.jpg");
-    const imageResponse = await page.request.get(new URL(image.pathname, siteUrl.origin).href);
+    // Map the canonical production asset to the audited base (development uses /).
+    const imageAssetPath = image.pathname.slice(new URL(metadata.canonical).pathname.length);
+    const imageResponse = await page.request.get(new URL(imageAssetPath, siteUrl).href);
     assert.ok(imageResponse.ok());
     assert.match(imageResponse.headers()["content-type"], /^image\//);
   });

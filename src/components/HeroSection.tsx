@@ -85,7 +85,7 @@ const HeroSection = () => {
                 animate={{ clipPath: heroReady || shouldReduceMotion ? "inset(0% 0% 0% 0% round 24px)" : "inset(100% 0% 0% 0% round 24px)" }} transition={{ duration: shouldReduceMotion ? 0 : 0.7, delay: shouldReduceMotion ? 0 : 0.25, ease: easeOut }}>
                 <motion.img src={import.meta.env.BASE_URL + "images/vasanthakumar-profile.jpg"}
                   alt="Vasanthakumar Rajendran - Front-End Developer" width={1309} height={1202}
-                  fetchPriority="high" decoding="async" className="hero-portrait" initial={shouldReduceMotion ? false : { scale: 1.04 }} animate={{ scale: heroReady ? 1 : 1.04 }} transition={{ duration: shouldReduceMotion ? 0 : 0.7, delay: shouldReduceMotion ? 0 : 0.25, ease: easeOut }} />
+                  {...{ fetchpriority: "high" }} decoding="async" className="hero-portrait" initial={shouldReduceMotion ? false : { scale: 1.04 }} animate={{ scale: heroReady ? 1 : 1.04 }} transition={{ duration: shouldReduceMotion ? 0 : 0.7, delay: shouldReduceMotion ? 0 : 0.25, ease: easeOut }} />
               </motion.div>
               <div className="hero-badge-layer">
                 <div className="hero-chip-react"><div className="hero-identity hero-identity-react"><Atom aria-hidden="true" /><span>React</span></div></div>

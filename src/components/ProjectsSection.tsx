@@ -47,10 +47,14 @@ const ProjectsSection = () => {
         <div className="border-t border-border pt-6 mt-8">
           <h4 className="font-semibold mb-4">Customer shopping workflow</h4>
           <div className="workflow-list">
+            <span aria-hidden="true" className="workflow-track" />
             <span aria-hidden="true" className="workflow-connector" />
             <span aria-hidden="true" className="workflow-traveler" />
-            <StaggerContainer as="ol" className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {marketplace.workflow.map((step, index) => <StaggerItem key={step} className="workflow-step rounded-lg bg-muted p-3 flex items-center justify-between gap-2 text-sm font-medium"><span aria-hidden="true" className="workflow-light" /><span>{step}</span>{index < marketplace.workflow.length - 1 && <ArrowRight aria-hidden="true" className="w-4 h-4 text-primary shrink-0" />}</StaggerItem>)}
+            <StaggerContainer as="ol" className="workflow-steps" aria-label="Customer shopping workflow">
+              {marketplace.workflow.map((step, index) => <StaggerItem key={step} className="workflow-step">
+                <span aria-hidden="true" className="workflow-marker">{String(index + 1).padStart(2, "0")}</span>
+                <div className="workflow-card"><span aria-hidden="true" className="workflow-light" /><span className="workflow-label">{step}</span></div>
+              </StaggerItem>)}
             </StaggerContainer>
           </div>
         </div>

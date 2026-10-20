@@ -42,10 +42,19 @@ export default function CinematicScenes() {
       if (pravokha) reveal(pravokha, pravokha, { y: 0, clipPath: "inset(12% 8% 12% 8% round 24px)" });
       const workflow = document.querySelector(".workflow-list");
       if (workflow) {
-        const flow = gsap.timeline({ scrollTrigger: { trigger: workflow, start: "top 85%", end: "bottom 40%", scrub: cinema.scrub } });
-        flow.fromTo(".workflow-connector", { scaleX: 0 }, { scaleX: 1, ease: "none", duration: 1 }, 0)
-          .fromTo(".workflow-light", { opacity: 0 }, { opacity: 1, stagger: 0.22, duration: 0.2 }, 0)
-          .fromTo(".workflow-traveler", { x: 0 }, { x: () => workflow.clientWidth - 12, ease: "none", duration: 1 }, 0);
+        media.add({ horizontal: "(min-width: 768px)", vertical: "(max-width: 767px)" }, context => {
+          const horizontal = context.conditions?.horizontal;
+          const markers = workflow.querySelectorAll<HTMLElement>(".workflow-marker");
+          const distance = () => {
+            const first = markers[0].getBoundingClientRect();
+            const last = markers[markers.length - 1].getBoundingClientRect();
+            return horizontal ? last.left - first.left : last.top - first.top;
+          };
+          const flow = gsap.timeline({ scrollTrigger: { trigger: workflow, start: "top 85%", end: "bottom 40%", scrub: cinema.scrub, invalidateOnRefresh: true } });
+          flow.fromTo(workflow.querySelector(".workflow-connector"), horizontal ? { scaleX: 0 } : { scaleY: 0 }, horizontal ? { scaleX: 1, ease: "none", duration: 1 } : { scaleY: 1, ease: "none", duration: 1 }, 0)
+            .fromTo(workflow.querySelectorAll(".workflow-light"), { opacity: 0 }, { opacity: 1, stagger: 0.22, duration: 0.2 }, 0)
+            .fromTo(workflow.querySelector(".workflow-traveler"), { x: 0, y: 0 }, horizontal ? { x: distance, ease: "none", duration: 1 } : { y: distance, ease: "none", duration: 1 }, 0);
+        });
       }
       const map = document.querySelector(".contact-map-frame");
       if (map) reveal(map, map, { y: 0, clipPath: "circle(0% at 50% 50%)", onComplete() { gsap.set(map, { clipPath: "none" }); } });
